@@ -8,7 +8,7 @@
 						<li><a href="<?= site_url('about')?>">About</a></li>
 						<li><a href="<?= site_url('documentation')?>">Documentation</a></li>
 						<li><a href="<?= site_url('studies')?>">Studies</a></li>
-						<li><a href="https://www.psych.uni-goettingen.de/de/datenschutzerklaerung" target="_blank">Privacy Policy</a></li>
+						<li><a href="https://www.uni-muenster.de/de/datenschutzerklaerung.html" target="_blank">Privacy Policy</a></li>
 					</ul>
 				</div>
 			</div>
@@ -28,10 +28,9 @@
 				<div class="fmr-footer-widget">
 					<h3>Imprint</h3>
 					<p>
-						Georg-Elias-Mueller-Institut of Psychology<br>
-						University of Goettingen <br>
-						Goßlerstraße 14, <br>
-						37073 Göttingen <br>
+						Universität Münster<br>
+						Schlossplatz 2<br>
+						48149 Münster<br>
 						Germany
 					</p>
 				</div>
