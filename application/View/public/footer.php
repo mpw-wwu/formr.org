@@ -28,7 +28,7 @@
 				<div class="fmr-footer-widget">
 					<h3>Imprint</h3>
 					<p>
-						Universität Münster<br>
+						Westfälische Wilhelms-Universität Münster<br>
 						Schlossplatz 2<br>
 						48149 Münster<br>
 						Germany
@@ -39,7 +39,7 @@
 			<div class="col-md-2 col-sm-6 col-xs-12 animate-box">
 				<div class="fmr-footer-widget">
 					<ul class="fmr-links">
-						<li><a href="https://www.uni-goettingen.de/" target="_blank"><img src="<?= asset_url('build/img/goettingen_uni.png') ?>" alt="Uni Göttingen logo"></a></li>
+						<li><a href="https://wwu.de/" target="_blank"><img src="<?= asset_url('build/img/wwu.svg') ?>" alt="Logo der WWU"></a></li>
 					</ul>
 				</div>
 			</div>
