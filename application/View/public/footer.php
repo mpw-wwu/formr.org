@@ -8,7 +8,7 @@
 						<li><a href="<?= site_url('about')?>">About</a></li>
 						<li><a href="<?= site_url('documentation')?>">Documentation</a></li>
 						<li><a href="<?= site_url('studies')?>">Studies</a></li>
-						<li><a href="https://www.uni-muenster.de/de/datenschutzerklaerung.html" target="_blank">General Privacy Policy</a>, <a href="https://www.uni-muenster.de/PsyTD/formr/extended-privacy-policy.html">Extended Privacy Policy</li>
+						<li><a href="https://www.uni-muenster.de/de/datenschutzerklaerung.html" target="_blank">General Privacy Policy</a>, <a href="https://www.uni-muenster.de/PsyTD/formr/extended-privacy-policy.html">Extended Privacy Policy</a></li>
 					</ul>
 				</div>
 			</div>
