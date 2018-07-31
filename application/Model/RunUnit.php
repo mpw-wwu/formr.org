@@ -46,6 +46,11 @@ class RunUnit {
 	public $description = "";
 	protected $had_major_changes = false;
 
+	private $expiryTime = null;
+	private $maxRuntime = null;
+	private $hasExpiry = null;
+
+
 	/**
 	 * An array of unit's exportable attributes
 	 * @var array
@@ -817,4 +822,27 @@ plot(cars)
 		return array_val($defaults, $type, array());
 	}
 
+	public function isExpired() {
+		if ($this->hasExpiry) return now() < $this->expiryTime;
+		else return FALSE;
+	}
+	public function hasExpiry() {
+		return $this->hasExpiry;
+	}
+	public function setExpiry(Integer $maxRuntime = null) {
+		// TODO Can be merged into the constructor later
+		if (isset($maxRuntime)) {
+			$this->hasExpiry = TRUE;
+			$this->maxRuntime = $maxRuntime;
+
+		} else {
+			$this->hasExpiry = FALSE;
+		}
+	}
+
+	public function calculateExpiry(Long $timestampUnitStarted) : Long {
+		if (! $this->hasExpiry()) return false;
+		$this->expiryTime = timestampUnitStarted + maxRuntime;	
+		return $this->expiryTime;
+	}
 }
