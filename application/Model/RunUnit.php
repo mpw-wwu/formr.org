@@ -829,7 +829,7 @@ plot(cars)
 	public function hasExpiry() {
 		return $this->hasExpiry;
 	}
-	public function setExpiry(Integer $maxRuntime = null) {
+	public function setExpiry(int $maxRuntime = null) {
 		// TODO Can be merged into the constructor later
 		if (isset($maxRuntime)) {
 			$this->hasExpiry = TRUE;
