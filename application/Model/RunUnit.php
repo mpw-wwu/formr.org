@@ -823,7 +823,7 @@ plot(cars)
 	}
 
 	public function isExpired() {
-		if ($this->hasExpiry) return now() < $this->expiryTime;
+		if ($this->hasExpiry() && isset($this->expiryTime)) return time() > $this->expiryTime;
 		else return FALSE;
 	}
 	public function hasExpiry() {
@@ -840,9 +840,9 @@ plot(cars)
 		}
 	}
 
-	public function calculateExpiry(Long $timestampUnitStarted) : Long {
-		if (! $this->hasExpiry()) return false;
-		$this->expiryTime = timestampUnitStarted + maxRuntime;	
+	public function calculateExpiry(int $timestampUnitStarted) : int {
+		if (! $this->hasExpiry()) return null;
+		$this->expiryTime = $timestampUnitStarted + $this->maxRuntime;	
 		return $this->expiryTime;
 	}
 }
