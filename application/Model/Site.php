@@ -125,14 +125,16 @@ class Site {
 		$mail->Mailer = "smtp";
 		$mail->Host = $settings['email']['host'];
 		$mail->Port = $settings['email']['port'];
-		if ($settings['email']['tls']) {
-			$mail->SMTPSecure = 'tls';
-		} else {
-			$mail->SMTPSecure = 'ssl';
-		}
-		$mail->SMTPAuth = true; // turn on SMTP authentication
-		$mail->Username = $settings['email']['username']; // SMTP username
-		$mail->Password = $settings['email']['password']; // SMTP password
+      if (isset($settings['email']['username'])) {
+   		$mail->Username = $settings['email']['username']; // SMTP username
+   		$mail->Password = $settings['email']['password']; // SMTP password
+		   $mail->SMTPAuth = true; // turn on SMTP authentication
+		   if ($settings['email']['tls']) {
+		   	$mail->SMTPSecure = 'tls';
+		   } else {
+		   	$mail->SMTPSecure = 'ssl';
+		   }
+      }
 
 		$mail->From = $settings['email']['from'];
 		$mail->FromName = $settings['email']['from_name'];
