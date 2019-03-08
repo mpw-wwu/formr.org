@@ -89,9 +89,6 @@ class DB {
 		$params = $data['params'];
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($params);
-		//dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('execute: '.print_r($params, true));
-
 		if ($fetchcol) {
 			return $stmt->fetchColumn();
 		}
@@ -100,17 +97,6 @@ class DB {
 		}
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
-	/**
-	 * Debugging Database queries
-	 */
-	public function dumpDatabaseQueries($stmt, $functionName) {
-		ob_start();
-		$stmt->debugDumpParams();
-		formr_log('functionName: ' . $functionName. ' ' .ob_get_contents());
-		ob_end_clean();
-		formr_log($stmt->errorInfo());
-	}
-
 
 	/**
 	 * Used for INSERT, UPDATE and DELETE
@@ -125,9 +111,6 @@ class DB {
 			$params = $data['params'];
 			$sth = $this->PDO->prepare($query);
 			$sth->execute($params);
-			$this->dumpDatabaseQueries($sth, __FUNCTION__);
-			formr_log('exec: '.print_r($params,true));
-			formr_log('exec: '.$query);
 			return $sth->rowCount();
 		}
 		return $this->PDO->exec($query);
@@ -159,8 +142,6 @@ class DB {
 
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($args);
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('rquery: '.$args);
 		return $stmt;
 	}
 
@@ -174,8 +155,6 @@ class DB {
 		# create a prepared statement
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute();
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('num_rows: '.$query);
 		return $stmt->rowCount();
 	}
 
@@ -265,8 +244,6 @@ class DB {
 
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($params);
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('count: '.print_r($params, true));
 		return $stmt->fetchColumn();
 	}
 
@@ -308,8 +285,6 @@ class DB {
 		$stmt = $this->PDO->prepare($query);
 		$stmt = $this->bindValues($stmt, $data, array_values($types), false, true);
 		$stmt->execute();
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('insert: '.print_r($data, true));
 		return $this->lastInsertId();
 	}
 
@@ -334,8 +309,6 @@ class DB {
 		$updates_str = $this->getDuplicateUpdateString($updates);
 
 		$query = "INSERT INTO $table ($columns_str) VALUES ($values_str) ON DUPLICATE KEY UPDATE $updates_str";
-		formr_log('insert_update: '.print_r($data, true));
-		formr_log('insert_update: '.print_r($updates,true));
 		return $this->exec($query, $data);
 	}
 
@@ -384,12 +357,9 @@ class DB {
 
 		/* @var $stmt PDOStatement */
 		$stmt = $this->PDO->prepare($query);
-		formr_log($query);
 		$stmt = $this->bindValues($stmt, $data, array_values($data_types), true, true);
 		$stmt = $this->bindValues($stmt, $where, array_values($where_types));
 		$stmt->execute();
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('Function update $data: ' . print_r($data, true));
 		return $stmt->rowCount();
 	}
 
@@ -404,8 +374,6 @@ class DB {
 		$stmt = $this->PDO->prepare($query);
 		$stmt = $this->bindValues($stmt, $data, array_values($types), false, true);
 		$stmt->execute();
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('delete: '.print_r($data, true));
 		return $stmt->rowCount();
 	}
 
@@ -615,16 +583,6 @@ class DB_Select {
 	public function __destruct() {
 		$this->PDO = null;
 	}
-	/**
-	 * Debugging Database queries
-	 */
-	public function dumpDatabaseQueries($stmt) {
-		ob_start();
-		$stmt->debugDumpParams();
-		formr_log(ob_get_contents());
-		ob_end_clean();
-		formr_log($stmt->errorInfo());
-	}
 
 	public function columns(array $cols) {
 		if ($cols) {
@@ -723,8 +681,6 @@ class DB_Select {
 		$query = $this->trimQuery();
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($this->params);
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log(print_r($this->params, true));
 		return $stmt->fetchAll($fetch_style);
 	}
 
@@ -736,8 +692,6 @@ class DB_Select {
 		$query = $this->trimQuery();
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($this->params);
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log(print_r($this->params, true));
 		return $stmt->fetch($fetch_style);
 	}
 
@@ -749,8 +703,6 @@ class DB_Select {
 		$query = $this->trimQuery();
 		$stmt = $this->PDO->prepare($query);
 		$stmt->execute($this->params);
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log(print_r($this->params, true));
 		return $stmt->fetchColumn();
 	}
 
@@ -769,8 +721,6 @@ class DB_Select {
 			}
 		}
 		$stmt->execute();
-		$this->dumpDatabaseQueries($stmt, __FUNCTION__);
-		formr_log('statement: '.print_r($this->params, true));
 		return $stmt;
 	}
 
